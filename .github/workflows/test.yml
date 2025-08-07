@@ -12,13 +12,19 @@ jobs:
         run: npm run lint
   test:
     needs: [lint]
+    strategy:
+      matrex:
+        version: [18, 22, 20]
     runs-on: ubuntu-latest
     steps:
       - name: CheckOut
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.version}}
       - name: Install
         run: npm ci
       - name: Test Tekshirish
         env:
           PORT: ${{secrets.PORT}}
-        run: npm run test     
+        run: npm run test
