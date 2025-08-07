@@ -13,7 +13,7 @@ jobs:
   test:
     needs: [lint]
     strategy:
-      matrex:
+      matrix:
         version: [18, 22, 20]
     runs-on: ubuntu-latest
     steps:
